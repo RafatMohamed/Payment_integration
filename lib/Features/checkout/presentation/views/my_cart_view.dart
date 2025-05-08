@@ -1,10 +1,10 @@
+import 'package:checkout_payment/Features/checkout/presentation/views/widgets/bottom_shett_w.dart';
 import 'package:checkout_payment/Features/checkout/presentation/views/widgets/custom_price.dart';
 import 'package:checkout_payment/Features/checkout/presentation/views/widgets/custome_appbar.dart';
 import 'package:checkout_payment/Features/checkout/presentation/views/widgets/getway_payment.dart';
 import 'package:checkout_payment/core/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
 import '../../../../core/utils/app_assests.dart';
 import '../../../../core/widgets/default_material_button.dart';
 
@@ -194,32 +194,3 @@ class _MyCartViewState extends State<MyCartView> {
   }
 }
 
-class ShowBottomSheet extends StatelessWidget {
-  const ShowBottomSheet({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: MediaQuery.of(context).size.height * 0.3,
-      margin: const EdgeInsetsDirectional.symmetric(horizontal: 8),
-      padding: const EdgeInsetsDirectional.symmetric(horizontal: 24, vertical: 16),
-      decoration: BoxDecoration(
-        color: Colors.transparent,
-        borderRadius: BorderRadius.circular(32),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.5),
-            blurRadius: 5,
-            spreadRadius: 5,
-          ),
-        ],
-      ),
-      child: const Column(
-        children: [
-          GetwayPayment(),
-          Spacer(),
-        ],
-      ),
-    );
-  }
-}
