@@ -1,0 +1,106 @@
+import 'package:flutter/material.dart';
+
+class TextFormFieldApp extends StatelessWidget {
+  const TextFormFieldApp({
+    super.key,
+    this.maxLine = 1,
+    required this.labelText,
+    this.labelFontWeight = FontWeight.normal,
+    this.labelFontSize = 19,
+    this.labelFontStyle = FontStyle.normal,
+    this.labelTextAlign = TextAlign.start,
+    required this.hintText,
+    this.hintFontWeight = FontWeight.w200,
+    this.hintFontSize = 14,
+    this.hintColor = Colors.white,
+    this.hintFontStyle = FontStyle.normal,
+    this.hintTextAlign = TextAlign.start,
+    this.radius = 10,
+    this.keyboardType = TextInputType.text,
+    this.textInputAction = TextInputAction.done,
+    this.borderDecorationColor = Colors.green,
+    this.validator,
+    required this.onChange,
+    this.onSubmitted,
+    required this.controller,
+    this.obscureText = false,
+    this.suffixIcon,
+  });
+  final bool obscureText;
+  final int maxLine;
+  final Color borderDecorationColor;
+  final String hintText;
+  final FontWeight hintFontWeight;
+  final double hintFontSize;
+  final Color hintColor;
+  final FontStyle? hintFontStyle;
+  final TextAlign? hintTextAlign;
+  final String labelText;
+  final FontWeight labelFontWeight;
+  final double labelFontSize;
+  final FontStyle? labelFontStyle;
+  final TextAlign? labelTextAlign;
+  final double radius;
+  final TextInputType keyboardType;
+  final TextInputAction textInputAction;
+  final FormFieldValidator? validator;
+  final Function(String) onChange;
+  final Function(String)? onSubmitted;
+  final TextEditingController controller;
+  final Widget? suffixIcon;
+
+  @override
+  Widget build(BuildContext context) {
+    const Color labelColor= Colors.black;
+    return TextFormField(
+      enableSuggestions: true,
+      validator: validator,
+      obscureText: obscureText,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      controller: controller,
+      onChanged: onChange,
+      onFieldSubmitted: onSubmitted,
+      decoration: InputDecoration(
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(radius),
+          borderSide: const BorderSide(color: Colors.black, width: 2),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(radius),
+          borderSide: const BorderSide(color: Colors.black, width: 2),
+        ),
+        enabledBorder : OutlineInputBorder(
+          borderRadius: BorderRadius.circular(radius),
+          borderSide: const BorderSide(color: Colors.black45, width: 2),
+        ),
+        suffixIcon: suffixIcon,
+        // floatingLabelBehavior: FloatingLabelBehavior.auto,
+        // floatingLabelAlignment: FloatingLabelAlignment.start,
+        labelText: labelText,
+        labelStyle: TextStyle(
+          color: labelColor,
+          fontSize: labelFontSize,
+          fontWeight: labelFontWeight,
+          fontStyle: labelFontStyle,
+        ),
+        hintText: hintText,
+        hintStyle: TextStyle(
+          color: labelColor,
+          fontSize: hintFontSize,
+          fontWeight: hintFontWeight,
+          fontStyle: hintFontStyle,
+        ),
+      ),
+      keyboardType: keyboardType,
+      maxLines: maxLine,
+      textInputAction: textInputAction,
+      textAlign: TextAlign.start,
+      style: TextStyle(
+        color: labelColor,
+        fontSize: labelFontSize,
+        fontWeight: labelFontWeight,
+        fontStyle: labelFontStyle,
+      ),
+    );
+  }
+}
