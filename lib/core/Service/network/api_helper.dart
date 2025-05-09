@@ -1,0 +1,53 @@
+import 'dart:developer';
+import 'package:dio/dio.dart';
+
+import '../../../private_key.dart';
+import 'api_response.dart';
+import 'end_points.dart';
+
+class ApiHelper {
+  ApiHelper._internal();
+
+  static final ApiHelper _instance = ApiHelper._internal();
+
+  factory ApiHelper() {
+    return _instance;
+  }
+
+  Dio dio = Dio(
+    BaseOptions(
+      connectTimeout: const Duration(seconds: 10),
+      sendTimeout: const Duration(seconds: 12),
+      receiveTimeout: const Duration(seconds: 15),
+    ),
+  )
+    ..interceptors.add(
+      InterceptorsWrapper(
+        onRequest: (options, handler) {
+          log('Path: ${options.path}');
+          log('Method: ${options.method}');
+          log('Headers: ${options.headers}');
+          log('Data: ${options.data}');
+          return handler.next(options);
+        },
+      ),
+    );
+
+
+
+//postDio
+  Future<ApiResponse> postDioRequest({required Map<String, dynamic> body, String? contentType}) async {
+    try {
+      var response = await dio.post("${EndPoints.baseUrl}",data:body,options: Options(
+        contentType:contentType,
+        headers: {
+          'Authorization': 'Bearer ${LocalData.accessToken}'
+        }
+      ) );
+      return ApiResponse.fromResponse(response);
+    } catch (e) {
+      return ApiResponse.fromError(e.toString());
+    }
+  }
+
+}
